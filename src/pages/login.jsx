@@ -1,13 +1,16 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
-import { myArray } from '../components/logintest'
+import { Link, useNavigate } from 'react-router-dom'
 
 
+
+import { users } from '../components/logintest'
 import '../styles/login.css'
 import logo from '../assets/logo.png'
 
 export default function Login() {
-    const[message, setMessage]= useState('');
+    const navigate = useNavigate()
+    const [showPass, setShowPass] = useState(false);
+    const [message, setMessage] = useState('');
     const [pwdCheck, setpwdCheck] = useState(!false);
     const [loginData, setLoginData] = useState(
         {
@@ -41,11 +44,18 @@ export default function Login() {
     }
     function submitLoginData(event) {
         event.preventDefault();
-        const userPresent = myArray.find(user => user.email === loginData.email);
-        // console.log(userPresent)
-        if(userPresent=== undefined) setMessage('User not found')
-        else if(userPresent.password !== loginData.password) setMessage('Check your Credentials')
-        else setMessage('Login successful')
+        if (loginData.email && loginData.password) {
+            const userPresent = users.find(user => user.email === loginData.email);
+            // console.log(userPresent)
+            if (userPresent === undefined) setMessage('User not found')
+            else if (userPresent.password !== loginData.password) setMessage('Check your Credentials')
+            else {
+                setMessage('Login successful')
+                setTimeout(() => {
+                    navigate('/admindashboard')
+                }, 2000);
+            }
+        }
     }
 
 
@@ -69,7 +79,8 @@ export default function Login() {
                             placeholder='Email'
                             required />
 
-                        <input type="password"
+                        <input 
+                        type={showPass? "text" :"password"}
                             name="password"
                             value={loginData.password}
                             onChange={handleOnChange}
@@ -78,8 +89,18 @@ export default function Login() {
                             onFocus={handleOnFocus}
                             onBlur={handleOnBlur}
                             required />
-                            {message && <p className='invalid'>{message}</p>}
-                        {!pwdCheck && <p className={pwdCheck ? 'valid' : 'invalid'}>Password must be more than 7 characters</p>}
+
+                        {showPass ?
+                            <i className="fa-sharp fa-solid fa-eye-slash" onClick={() => {
+                                setShowPass(false)
+                            }}></i>
+                            :
+                            <i className="fa-regular fa-eye" onClick={() => {
+                                setShowPass(true)
+                            }
+                            }></i>}
+                        {message && <p className={message === 'Login successful' ? 'valid' : 'invalid'}>{message}</p>}
+                        {/* {!pwdCheck && <p className={pwdCheck ? 'valid' : 'invalid'}>Password must be more than 7 characters</p>} */}
 
                     </div>
                     <div className="rememberMe">
