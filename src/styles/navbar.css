@@ -1,0 +1,84 @@
+.navbar {
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    background-color: #D9D9D9;
+    padding: 0vh 1vw;
+    box-shadow:0px 1px 10px rgba(0, 0, 0, 0.1);
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+}
+
+.nav-left img {
+    height: 100%;
+    margin-right: 1vh;
+}
+
+.nav-left h1 {
+    text-transform: capitalize;
+    font-size: xx-large;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    color: #414c50;
+    justify-content: right;
+    height: 100%;
+    position: relative;
+}
+
+.nav-right>* {
+    margin: 0vh .8vw;
+}
+.nav-right i:hover,.nav-right .name-title:hover {
+    color: #00BCC2;
+}
+
+.nav-right img {
+    height: 70%;
+    border-radius: 50%;
+    margin-right: .1vw;
+}
+
+.name-title h5,
+.name-title h6 {
+    margin: 0;
+}
+
+.name-title h6 {
+    font-weight: 100;
+}
+
+.dropDown {
+    position: absolute;
+    z-index: 1;
+    background-color: #D9D9D9;
+    border-radius: 5px;
+    padding: 1vh 0.3vw;
+    top: 11.4vh;
+}
+
+.dropDown a {
+    text-decoration: none;
+    color: #414c50;
+}
+
+.dropDown p {
+    margin: 0;
+    padding: 0vh 1.2vw;
+    font-size: 13px;
+}
+
+.dropDown p:hover {
+    color: #00BCC2;
+    cursor: pointer;
+}
+
+.dropDown hr {
+    border: none;
+    border-top: 0.1vh solid #95a8b1;
+}
