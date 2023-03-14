@@ -49,22 +49,20 @@
     background-color: #223B44;
     border: none;
     border-radius: 5px;
-    /* margin-bottom: 2vh; */
     height: 6vh;
     color: white;
     padding: 0vh 1.5vw;
     font-weight: 400;
     font-size: 15px;
-    /* outline: none; */
 }
-i{
+.show-pass{
     position: absolute;
     z-index: 1;
     top: 70%;
     left: 88%;
     color: #01a0a5;
 }
-i:hover{
+.show-pass:hover{
     color: #00BCC2;
 }
 

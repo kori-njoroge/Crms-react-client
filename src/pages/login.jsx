@@ -11,27 +11,13 @@ export default function Login() {
     const navigate = useNavigate()
     const [showPass, setShowPass] = useState(false);
     const [message, setMessage] = useState('');
-    const [pwdCheck, setpwdCheck] = useState(!false);
     const [loginData, setLoginData] = useState(
         {
             email: "",
             password: ""
         }
     )
-    function handleonKeyup(event) {
-        const { value } = event.target;
-        const pwd = value.length >= 8;
-        setpwdCheck(pwd);
-    }
 
-    function handleOnFocus() {
-        setpwdCheck(false)
-        setMessage('')
-    }
-
-    function handleOnBlur() {
-        setpwdCheck(true)
-    }
 
     function handleOnChange(event) {
         const { name, value } = event.target;
@@ -51,6 +37,7 @@ export default function Login() {
             else if (userPresent.password !== loginData.password) setMessage('Check your Credentials')
             else {
                 setMessage('Login successful')
+                window.localStorage.setItem('login', true)
                 setTimeout(() => {
                     navigate('/admindashboard')
                 }, 2000);
@@ -85,22 +72,18 @@ export default function Login() {
                             value={loginData.password}
                             onChange={handleOnChange}
                             placeholder='Password'
-                            onKeyUp={handleonKeyup}
-                            onFocus={handleOnFocus}
-                            onBlur={handleOnBlur}
                             required />
 
                         {showPass ?
-                            <i className="fa-sharp fa-solid fa-eye-slash" onClick={() => {
+                            <i className="fa-sharp fa-solid fa-eye-slash show-pass"  onClick={() => {
                                 setShowPass(false)
                             }}></i>
                             :
-                            <i className="fa-regular fa-eye" onClick={() => {
+                            <i className="fa-regular fa-eye show-pass" onClick={() => {
                                 setShowPass(true)
                             }
                             }></i>}
                         {message && <p className={message === 'Login successful' ? 'valid' : 'invalid'}>{message}</p>}
-                        {/* {!pwdCheck && <p className={pwdCheck ? 'valid' : 'invalid'}>Password must be more than 7 characters</p>} */}
 
                     </div>
                     <div className="rememberMe">
