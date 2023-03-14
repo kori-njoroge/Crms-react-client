@@ -1,0 +1,48 @@
+.admin-dashboard {
+    background-color: #BCBCBC;
+    /* background-color: #d6d4d4; */
+    min-height: 100vh;
+}
+
+.navnav {
+    height: 11vh;
+    position: sticky;
+}
+
+.back-btn {
+    height: 5vh;
+    padding: 0vh .6vw;
+    font-size: 15px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    margin: 2vh 0vh 0vh 0.2vw;
+    position: sticky;
+    background-color: #D9D9D9;
+    border: none;
+    border-radius: 3px;
+}
+.back-btn i {
+    font-size: 10px;
+}
+.back-btn:hover{
+    outline: 1px solid #757575;
+    color: #4b4a4a;
+    cursor: pointer;
+}
+
+.dashboard-body {
+    display: flex;
+    gap: 2vw;
+}
+
+.sidebar {
+    position: sticky;
+    flex: 15;
+    margin: 0vh 0.2vw;
+}
+.outlet{
+    flex:80;
+    background-color: #D9D9D9;
+}
