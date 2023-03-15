@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
 import '../styles/navbar.css'
@@ -6,8 +6,13 @@ import logo from '../assets/logo.png'
 import member from '../assets/rick.png'
 
 export default function Navbar() {
+    const[user, setUser] = useState()
     const navigate = useNavigate()
     const [chevDown, setChevDown] = useState(false);
+    useEffect(()=>{
+        let user = JSON.parse(window.localStorage.getItem('user'))
+        setUser(user)
+    },[])
 
     return (
         <div className='navbar'>
@@ -19,8 +24,8 @@ export default function Navbar() {
                 <i className="fa-solid fa-bell"></i>
                 <img src={member} alt="member logo" />
                 <div className="name-title">
-                    <h5>Gideon Kori</h5>
-                    <h6>Admin</h6>
+                    <h5>{user?.username}</h5>
+                    <h6>{user?.title}</h6>
                 </div>
                 {chevDown ?
                     <i className="fa-solid fa-chevron-right"
@@ -32,7 +37,7 @@ export default function Navbar() {
 
                 {chevDown &&
                     <div className='dropDown'>
-                        <hr />
+                        {/* <hr /> */}
                         <Link to ={''}><p><i className="fa-solid fa-gear"></i> Settings</p></Link>
                         <hr />
                         <p  onClick={() => {
@@ -41,7 +46,7 @@ export default function Navbar() {
                                 navigate('/')
                             }, 500);
                         }}><i className="fa-solid fa-right-from-bracket"></i> Logout</p>
-                        <hr />
+                        {/* <hr /> */}
                     </div>}
 
             </div>

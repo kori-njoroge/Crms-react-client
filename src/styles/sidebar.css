@@ -4,6 +4,7 @@
     text-align: left;
     padding: 1vh 1vh ;
     height: fit-content;
+    color: #223B44;
 }
 .sidebar h1{
     margin-bottom: 0;
@@ -24,7 +25,8 @@
 }
 .sidebar a{
     text-decoration: none;
-    color:black;
+    color: #223B44;
+    color: black;
 }
 .active{
     color: red;

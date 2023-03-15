@@ -51,18 +51,20 @@
     border-radius: 5px;
     height: 6vh;
     color: white;
-    padding: 0vh 1.5vw;
+    padding: 0vh 1.2vw;
     font-weight: 400;
     font-size: 15px;
 }
-.show-pass{
+
+.show-pass {
     position: absolute;
     z-index: 1;
     top: 70%;
     left: 88%;
     color: #01a0a5;
 }
-.show-pass:hover{
+
+.show-pass:hover {
     color: #00BCC2;
 }
 
@@ -89,7 +91,7 @@
     text-align: center;
 }
 
-.loginForm button {
+.abled-btn {
     width: 40%;
     margin: 2vh 0vw;
     padding: 1vh 0vw;
@@ -98,23 +100,38 @@
     border-radius: 5px;
     font-weight: 500;
     transition: .2 ease-in-out;
-}
-
-.loginForm button:hover {
-    /* transform:scale(1.1); */
     cursor: pointer;
-    color: #025658;
+}
+.disabled-btn {
+    width: 40%;
+    margin: 2vh 0vw;
+    padding: 1vh 0vw;
+    border: 1px solid #ADAEB1;
+    background-color: #ADAEB1;
+    border-radius: 5px;
+    font-weight: 500;
+    transition: .2 ease-in-out;
+    cursor: pointer;
 }
 
 .invalid {
-    /* color: #06743d; */
     color: red;
     font-size: 12px;
     margin: none;
+    text-align: left;
+    position: absolute;
+    z-index: 1;
+    top: 90%;
+    padding: 0vh 1.2vw;
+
 }
 
 .valid {
     color: #06a556;
     font-size: 12px;
     margin: none;
+    position: absolute;
+    z-index: 1;
+    top: 90%;
+    padding: 0vh 1.2vw;
 }

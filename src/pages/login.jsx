@@ -8,6 +8,11 @@ import '../styles/login.css'
 import logo from '../assets/logo.png'
 
 export default function Login() {
+
+
+    const [isFormValid, setIsFormValid] = useState(false);
+
+
     const navigate = useNavigate()
     const [showPass, setShowPass] = useState(false);
     const [message, setMessage] = useState('');
@@ -20,19 +25,39 @@ export default function Login() {
 
 
     function handleOnChange(event) {
+
+
         const { name, value } = event.target;
         setLoginData(prevState => {
             return {
                 ...prevState,
                 [name]: value
             }
-        })
+        });
+        const { target } = event
+        const isRequired = target.hasAttribute("required");
+        const isValid = isRequired ? value.trim() !== "" : true;
+
+
+        setIsFormValid((prevState) => ({
+            ...prevState,
+            [name]: isValid,
+        }));
+
+
     }
+
+    function handleOnfocus(){
+        setMessage('')
+    }
+
+
+
     function submitLoginData(event) {
         event.preventDefault();
         if (loginData.email && loginData.password) {
             const userPresent = users.find(user => user.email === loginData.email);
-            // console.log(userPresent)
+            window.localStorage.setItem('user',JSON.stringify(userPresent))
             if (userPresent === undefined) setMessage('User not found')
             else if (userPresent.password !== loginData.password) setMessage('Check your Credentials')
             else {
@@ -64,18 +89,20 @@ export default function Login() {
                             value={loginData.email}
                             onChange={handleOnChange}
                             placeholder='Email'
+                            onFocus={handleOnfocus}
                             required />
 
-                        <input 
-                        type={showPass? "text" :"password"}
+                        <input
+                            type={showPass ? "text" : "password"}
                             name="password"
                             value={loginData.password}
                             onChange={handleOnChange}
                             placeholder='Password'
+                            onFocus={handleOnfocus}
                             required />
 
                         {showPass ?
-                            <i className="fa-sharp fa-solid fa-eye-slash show-pass"  onClick={() => {
+                            <i className="fa-sharp fa-solid fa-eye-slash show-pass" onClick={() => {
                                 setShowPass(false)
                             }}></i>
                             :
@@ -97,7 +124,7 @@ export default function Login() {
                         </div>
                         <Link>Forgot Password?</Link>
                     </div>
-                    <button>Login</button>
+                    <button className={isFormValid ? 'abled-btn' : 'disabled-btn'} disabled={!isFormValid}>Login</button>
                 </form>
             </div>
         </div>
