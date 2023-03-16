@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import '../styles/users.css'
 import { users } from './logintest'
@@ -40,7 +40,7 @@ export default function Users() {
         return () => {
             document.removeEventListener('keydown', handleEscapeKeyPress);
         };
-    }, []);
+    }, [members]);
 
     return (
         <div className='user-page'>
@@ -93,10 +93,12 @@ export default function Users() {
                                 <td className='actions' onClick={() => { handleEllipsisClick(index) }}><i className="fa-solid fa-ellipsis-vertical" ></i></td>
                                 {showPopUp[index] &&
                                     <div className='action-drop'>
+
+                                        <i className="fa-solid fa-x fa-actions" onClick={()=>{handleEllipsisClose(index)}}></i>
                                         <p>Last Activity</p>
                                         <hr className='hrhr' />
                                         <p>Update Details</p>
-                                        <hr className='hrhr'  />
+                                        <hr className='hrhr' />
                                         <p>Delete Account</p>
                                     </div>}
                             </tr>

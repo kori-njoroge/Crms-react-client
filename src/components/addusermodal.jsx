@@ -47,7 +47,7 @@ export default function AddUserModal({ setAdduser, setMembers }) {
         return () => {
             window.removeEventListener('keydown', handleKeyDown);
         };
-    }, []);
+    }, [setAdduser]);
 
     return (
         <div className='modal'>
