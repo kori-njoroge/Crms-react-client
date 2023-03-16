@@ -6,13 +6,26 @@ import logo from '../assets/logo.png'
 import member from '../assets/rick.png'
 
 export default function Navbar() {
-    const[user, setUser] = useState()
+    const [user, setUser] = useState()
     const navigate = useNavigate()
     const [chevDown, setChevDown] = useState(false);
-    useEffect(()=>{
+    useEffect(() => {
         let user = JSON.parse(window.localStorage.getItem('user'))
         setUser(user)
-    },[])
+    }, []);
+
+    useEffect(() => {
+        function handleEscapeKeyPress(event) {
+            if (event.key === 'Escape') {
+                setChevDown(false);
+            }
+        }
+        document.addEventListener('keydown', handleEscapeKeyPress);
+        return () => {
+            document.removeEventListener('keydown', handleEscapeKeyPress);
+        };
+    }, []);
+
 
     return (
         <div className='navbar'>
@@ -36,18 +49,17 @@ export default function Navbar() {
                 }
 
                 {chevDown &&
-                    <div className='dropDown'>
-                        {/* <hr /> */}
-                        <Link to ={''}><p><i className="fa-solid fa-gear"></i> Settings</p></Link>
+                    (<div className='dropDown' >
+                        <Link to={''}><p><i className="fa-solid fa-gear"></i> Settings</p></Link>
                         <hr />
-                        <p  onClick={() => {
+                        <p onClick={() => {
                             window.localStorage.setItem('login', false)
                             setTimeout(() => {
                                 navigate('/')
                             }, 500);
                         }}><i className="fa-solid fa-right-from-bracket"></i> Logout</p>
-                        {/* <hr /> */}
-                    </div>}
+                    </div>)
+                }
 
             </div>
         </div>
