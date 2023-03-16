@@ -130,27 +130,45 @@ td {
 .action-drop {
     position: absolute;
     height: fit-content;
-    background-color: white;
+    background-color: #f8f8f8;
+    right: 0;
+    z-index: 1;
+    font-size: 12px;
+    padding: 1vh 1vw;
+    border-radius: 5px;
+    transform: translateY(-10px);
+    box-shadow: 0px 1px 20px rgba(34, 59, 68, .4);
+}
+
+.action-drop>* {
+    margin: 1.2vh 0vw;
+    cursor: pointer;
+}
+
+.action-drop>p:hover {
+    color: #00BCC2;
+}
+
+.hrhr {
+    border: none;
+    border-top: 0.1vh solid #95a8b1;
 }
 
 
 /* Modal Css */
 .modal {
-    /* border: 1px solid blue; */
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #cecbcb;
-    opacity: 1;    
+    /* background-color: rgba(206, 203, 203, .7); */
+    opacity: 1;
     display: flex;
-    justify-content: center;
-    /* align-items: center; */
 }
 
 .info-container {
-    background-color: #e2e2e2;
+    background-color: rgba(226, 226, 226, 1);
     width: 55%;
     height: fit-content;
     text-align: center;
@@ -158,17 +176,24 @@ td {
     border-radius: 10px;
     position: relative;
     opacity: 1;
+    filter: none;
+    margin-top: 5%;
+    margin-left: 17%;
+    box-shadow: 10px 15px 1000px #858282;
 }
-.info-container h5{
+
+.info-container h5 {
     margin: 0;
-    font-size:15px ;
+    font-size: 15px;
 }
-.fa-x{
+
+.fa-x {
     color: #0B858A;
     position: absolute;
     top: 5%;
     right: 4%;
 }
+
 .div {
     display: flex;
     text-align: left;
@@ -176,10 +201,12 @@ td {
     padding: 0vh 1.5vw;
     /* border: 1px solid; */
 }
-.userdet-form{
+
+.userdet-form {
     margin-top: 4vh;
 }
-.div> div{
+
+.div>div {
     width: 45%;
 }
 
@@ -190,37 +217,43 @@ td {
     color: #223B44;
     margin-top: 4vh;
 }
-.userdet-form input{
+
+.userdet-form input {
     outline: none;
     border: none;
     background-color: transparent;
     border-bottom: 1px solid #b8b7b7;
     width: 93%;
-    padding-left:1vw;
+    padding-left: 1vw;
 }
-.userdet-form input:hover, .userdet-form select:hover{
+
+.userdet-form input:hover,
+.userdet-form select:hover {
     border-bottom: 2px solid;
 }
-.userdet-form select{
-    width:100%;
+
+.userdet-form select {
+    width: 100%;
     border: none;
     background-color: transparent;
     border-bottom: 1px solid #b8b7b7;
     padding: 0vh 1vw;
 
 }
-.userdet-form button{
+
+.userdet-form button {
     margin: 2vh 0vw;
     margin: 4vh;
     width: 40%;
     height: 5.5vh;
     font-size: 14px;
-    font-weight:500 ;
-    background-color:#20DF7F;
+    font-weight: 500;
+    background-color: #20DF7F;
     border: none;
     border-radius: 3px;
-    cursor:pointer;
+    cursor: pointer;
 }
-.userdet-form button:hover{
+
+.userdet-form button:hover {
     border: 1px solid #858282;
 }

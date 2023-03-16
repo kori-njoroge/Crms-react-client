@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import logo from '../assets/logo.png'
 
@@ -14,11 +14,11 @@ export default function AddUserModal({ setAdduser, setMembers }) {
 
     function handleOnchange(event) {
         console.log(event)
-        const { name, value } = event.target;
+        const { name, value, type } = event.target;
         setUserDetails(prevState => {
             return {
                 ...prevState,
-                [name]: value
+                [name]: type === "checkbox" ? event.target.checked : value
             }
         })
     }
@@ -37,9 +37,21 @@ export default function AddUserModal({ setAdduser, setMembers }) {
         )
     }
 
+    useEffect(() => {
+        function handleKeyDown(event) {
+            if (event.keyCode === 27) {
+                setAdduser(false);
+            }
+        }
+        window.addEventListener('keydown', handleKeyDown);
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown);
+        };
+    }, []);
+
     return (
         <div className='modal'>
-            <div className="info-container">
+            <div className="info-container" >
                 <img src={logo} alt="company logo" />
                 <h5>Enter user details</h5>
                 <p className='valid'>User added successfully</p>

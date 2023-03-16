@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 
 import '../styles/users.css'
 import { users } from './logintest'
@@ -9,8 +9,7 @@ export default function Users() {
     const [adduser, setAdduser] = useState(false)
     const [members, setMembers] = useState(users)
     const [search, setSearch] = useState('');
-    // const[filtered, setFiltered] = useState("")
-    const [dropDown, setDropDown] = useState(!true);
+    const [showPopUp, setShowPopUp] = useState(members?.map(() => false));
 
     function setFilter(filter) {
         if (filter.trim()) {
@@ -19,6 +18,29 @@ export default function Users() {
             setMembers(users)
         }
     }
+
+    function handleEllipsisClick(index) {
+        const popUp = showPopUp.map((_, i) => i === index)
+        setShowPopUp(popUp)
+    }
+
+    function handleEllipsisClose(index) {
+        const newShowPopUp = [...showPopUp];
+        newShowPopUp[index] = false;
+        setShowPopUp(newShowPopUp);
+    }
+    useEffect(() => {
+        function handleEscapeKeyPress(event) {
+            if (event.key === 'Escape') {
+                const newShowPopUp = members?.map(() => false);
+                setShowPopUp(newShowPopUp);
+            }
+        }
+        document.addEventListener('keydown', handleEscapeKeyPress);
+        return () => {
+            document.removeEventListener('keydown', handleEscapeKeyPress);
+        };
+    }, []);
 
     return (
         <div className='user-page'>
@@ -60,7 +82,7 @@ export default function Users() {
                     <tbody>
                         {members && members.filter((user) => {
                             return search.toLowerCase() === "" ? user : user.username.toLowerCase().includes(search)
-                        }).map((user) => (
+                        }).map((user, index) => (
                             <tr className='actions-row' key={user.id}>
                                 <td>{user.id}</td>
                                 <td className='user--name'><img src={rick} alt="member logo" />{user.fullname}</td>
@@ -68,11 +90,13 @@ export default function Users() {
                                 <td>{user.email}</td>
                                 <td>{user.title}</td>
                                 <td>{user.joinDate}</td>
-                                <td className='actions'><i className="fa-solid fa-ellipsis-vertical"></i></td>
-                                {dropDown &&
+                                <td className='actions' onClick={() => { handleEllipsisClick(index) }}><i className="fa-solid fa-ellipsis-vertical" ></i></td>
+                                {showPopUp[index] &&
                                     <div className='action-drop'>
                                         <p>Last Activity</p>
+                                        <hr className='hrhr' />
                                         <p>Update Details</p>
+                                        <hr className='hrhr'  />
                                         <p>Delete Account</p>
                                     </div>}
                             </tr>
@@ -82,8 +106,8 @@ export default function Users() {
                 </table>
             </div>
             {adduser && <AddUserModal
-                                setAdduser={setAdduser}
-                                setMembers ={setMembers} />}
+                setAdduser={setAdduser}
+                setMembers={setMembers} />}
         </div>
     )
 }
