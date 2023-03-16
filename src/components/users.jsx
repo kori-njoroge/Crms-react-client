@@ -10,14 +10,18 @@ export default function Users() {
     const [members, setMembers] = useState(users)
     const [search, setSearch] = useState('');
     const [showPopUp, setShowPopUp] = useState(members?.map(() => false));
+    const [filter, setFilter] = useState("");
 
-    function setFilter(filter) {
-        if (filter.trim()) {
-            setMembers(users.filter(user => user.title === filter))
-        } else {
-            setMembers(users)
+    useEffect(() => {
+        function setFilterfunc() {
+            if (filter.trim()) {
+                setMembers(users.filter(user => user.title === filter))
+            } else {
+                setMembers(users)
+            }
         }
-    }
+        setFilterfunc();
+    }, [filter])
 
     function handleEllipsisClick(index) {
         const popUp = showPopUp.map((_, i) => i === index)
@@ -45,11 +49,11 @@ export default function Users() {
     return (
         <div className='user-page'>
             <div className="filters">
-                <h5 onClick={() => { setFilter(``) }} >All Users</h5>
-                <h5 onClick={() => { setFilter(`super Admin`) }} >Super Admins</h5>
-                <h5 onClick={() => { setFilter(`Admin`) }} >Admins</h5>
-                <h5 onClick={() => { setFilter(`staff`) }} >Staff</h5>
-                <h5 onClick={() => { setFilter(`customer`) }} >Customers</h5>
+                <h5 className={filter === "" ? "h5active" : ""} onClick={() => { setFilter(``) }} >All Users</h5>
+                <h5 className={filter === "super Admin" ? "h5active" : ""} onClick={() => { setFilter(`super Admin`) }} >Super Admins</h5>
+                <h5 className={filter === "Admin" ? "h5active" : ""} onClick={() => { setFilter(`Admin`) }} >Admins</h5>
+                <h5 className={filter === "staff" ? "h5active" : ""} onClick={() => { setFilter(`staff`) }} >Staff</h5>
+                <h5 className={filter === "customer" ? "h5active" : ""} onClick={() => { setFilter(`customer`) }} >Customers</h5>
             </div>
             <div className="searchPanel">
 
@@ -94,7 +98,7 @@ export default function Users() {
                                 {showPopUp[index] &&
                                     <div className='action-drop'>
 
-                                        <i className="fa-solid fa-x fa-actions" onClick={()=>{handleEllipsisClose(index)}}></i>
+                                        <i className="fa-solid fa-x fa-actions" onClick={() => { handleEllipsisClose(index) }}></i>
                                         <p>Last Activity</p>
                                         <hr className='hrhr' />
                                         <p>Update Details</p>
