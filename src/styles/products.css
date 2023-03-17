@@ -1,0 +1,14 @@
+.products-table tr{
+    color: #223B44;
+    height: 8vh;
+}
+/* .table-desc{
+    width: 22%;
+} */
+
+.sold-ou{
+    font-size: 12px;
+}
+.sold-out{
+    color:red;
+}
