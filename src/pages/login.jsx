@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 
 
 
-import { users } from '../components/logintest'
+import { users } from '../components/testData/logintest'
 import '../styles/login.css'
 import logo from '../assets/logo.png'
 
@@ -64,7 +64,7 @@ export default function Login() {
                 setMessage('Login successful')
                 window.localStorage.setItem('login', true)
                 setTimeout(() => {
-                    navigate('/admindashboard')
+                    navigate('/admindashboard/sales')
                 }, 2000);
             }
         }

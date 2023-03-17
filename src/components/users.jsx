@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 
 import '../styles/users.css'
-import { users } from './logintest'
+import { users } from './testData/logintest'
 import rick from '../assets/rick.png'
 import AddUserModal from './addusermodal'
 
@@ -47,7 +47,7 @@ export default function Users() {
     }, [members]);
 
     return (
-        <div className='user-page'>
+        <div className='modal-container'>
             <div className="filters">
                 <h5 className={filter === "" ? "h5active" : ""} onClick={() => { setFilter(``) }} >All Users</h5>
                 <h5 className={filter === "super Admin" ? "h5active" : ""} onClick={() => { setFilter(`super Admin`) }} >Super Admins</h5>
@@ -71,7 +71,7 @@ export default function Users() {
                 <button className='add-user-btn' onClick={() => { setAdduser(true) }}>Add User <i className="fa-solid fa-user-plus"></i></button>
             </div>
             <div className="table">
-                <table>
+                <table className='products-table'>
                     <thead>
                         <tr>
                             <td>#</td>
@@ -85,7 +85,7 @@ export default function Users() {
                     </thead>
                     <tbody>
                         {members && members.filter((user) => {
-                            return search.toLowerCase() === "" ? user : user.username.toLowerCase().includes(search)
+                            return search.toLowerCase() === "" ? user : user.fullname.toLowerCase().includes(search)
                         }).map((user, index) => (
                             <tr className='actions-row' key={user.id}>
                                 <td>{user.id}</td>

@@ -25,7 +25,6 @@ export default function AddUserModal({ setAdduser, setMembers }) {
 
     function handleSubmit(event) {
         event.preventDefault();
-        console.log(userDetails)
         setMembers(prevState => [...prevState, userDetails])
         setUserDetails(
             {
