@@ -1,0 +1,118 @@
+.summary-cards {
+    display: flex;
+    gap: 2vw;
+    margin-bottom: 2vh;
+}
+
+.summary-cards>div {
+    flex: 1 1 0;
+    background-color: #E9EBEB;
+    text-align: center;
+    border-radius: 8px;
+}
+
+.sum-card h4 {
+    font-size: 14px;
+    margin-bottom: 0.9vh;
+    font-weight: 600;
+    color: #018f94;
+}
+
+.sum-cards-flex {
+    display: flex;
+    justify-content: space-between;
+}
+
+.card-info,
+.card-info1 {
+    padding: 0vh 1vw;
+    text-align: left;
+}
+
+.card-info p,
+.card-info1 p {
+    margin: 0.4vh 0vw;
+}
+
+.card-info1 p {
+    font-size: 14px;
+    padding: 0vh 1.2vw;
+    margin: 1vh 0vw;
+    padding-left: .5vh;
+}
+
+
+.customer-stats {
+    font-size: 12px;
+    padding: 0vh 1.8vw;
+}
+
+.customer-stats h5 {
+    margin: 1vh 0vw;
+}
+
+.hrreport {
+    color: #d1d1d1;
+    border: none;
+    border-bottom: 0.01vh solid;
+    margin: 3vh 0vw;
+}
+
+.visuals {
+    display: flex;
+    gap: 2vw;
+}
+
+.visuals>div {
+    flex: 1 1 0;
+    text-align: center;
+    background-color: #E9EBEB;
+    border-radius: 3px;
+}
+
+.visuals-card {
+    padding: 0vh 1vw;
+}
+
+.visual-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 8vh;
+    margin: 0;
+    
+
+}
+
+.visual-head select {
+    color: #777777;
+    height: 70%;
+}
+
+.customPeriod {
+    font-size: 13px;
+    width: 100%;
+
+}
+
+.customPeriod input {
+    width: 37.5%;
+    color: #a7a4a4;
+    border: 0.1vh solid;
+    background-color: transparent;
+    outline: none;
+}
+
+.customPeriod button {
+    margin-top: 1vh;
+    padding: .5vh 1vw;
+    background-color: #20DF7F;
+    color: #014c4e;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.customPeriod button:hover {
+    border: 1px solid #d1d1d1;
+}
