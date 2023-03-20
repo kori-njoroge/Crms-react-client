@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 import logo from '../assets/logo.png'
 
 export default function AddUserModal({ setAdduser, setMembers }) {
+    const [message,setMessage]= useState('');
     const [userDetails, setUserDetails] = useState(
         {
             fullname: "",
@@ -26,6 +27,7 @@ export default function AddUserModal({ setAdduser, setMembers }) {
     function handleSubmit(event) {
         event.preventDefault();
         setMembers(prevState => [...prevState, userDetails])
+        setMessage("User added successfully")
         setUserDetails(
             {
                 fullname: "",
@@ -53,7 +55,7 @@ export default function AddUserModal({ setAdduser, setMembers }) {
             <div className="info-container" >
                 <img src={logo} alt="company logo" />
                 <h5>Enter user details</h5>
-                <p className='valid'>User added successfully</p>
+                {message && <p className='valid'>User added successfully</p>}
                 <i className="fa-solid fa-x" onClick={() => { setAdduser(false) }}></i>
                 <form className='userdet-form' onSubmit={handleSubmit} >
                     <div className="div">
@@ -101,7 +103,7 @@ export default function AddUserModal({ setAdduser, setMembers }) {
                             </select>
                         </div>
                     </div>
-                    <button>Add User</button>
+                    {message ==="User added successfully"? <button type='button' onClick={()=>{setAdduser(false)}}>Exit</button>: <button>Add User</button> }
                 </form>
             </div>
         </div>

@@ -97,7 +97,6 @@ export default function Users() {
                                 <td className='actions' onClick={() => { handleEllipsisClick(index) }}><i className="fa-solid fa-ellipsis-vertical" ></i></td>
                                 {showPopUp[index] &&
                                     <div className='action-drop'>
-
                                         <i className="fa-solid fa-x fa-actions" onClick={() => { handleEllipsisClose(index) }}></i>
                                         <p>Last Activity</p>
                                         <hr className='hrhr' />
