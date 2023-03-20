@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import logo from '../assets/logo.png'
 
 export default function AddProduct({ setAddProd, setProducts }) {
+    const[message, setMessage] = useState('')
     const [prodDetails, setProdDetails] = useState(
         {
             name: '',
@@ -26,18 +27,19 @@ export default function AddProduct({ setAddProd, setProducts }) {
     }
     function handleSubmit(event) {
         event.preventDefault();
-        let arr={
-            id:'AD54',
-            status:'Pending Approval',
-            remainingPieces:prodDetails.itmesNo
+        let arr = {
+            id: 'AD54',
+            status: 'Pending Approval',
+            remainingPieces: prodDetails.itmesNo
         }
-        let modified = Object.assign(prodDetails,arr)
+        let modified = Object.assign(prodDetails, arr)
         console.log(modified)
         setProducts(prevState => [...prevState, modified]);
-        
+        setMessage('Product added successfully')
+
     }
 
-console.log(prodDetails)
+    // console.log(prodDetails)
     return (
         <div className='modal'>
             <div className="info-container">
@@ -66,14 +68,17 @@ console.log(prodDetails)
                         </div>
                         <div className="">
                             <label htmlFor="category">Category:</label>
-                            <input
-                                type="text"
-                                id="category"
+                            <select
                                 name="category"
+                                id="category"
                                 value={prodDetails.category}
                                 onChange={handleOnchange}
-                                required
-                            />
+                                required>
+                                <option value="electronics">Electronics</option>
+                                <option value="men's clothes">Men's clothes</option>
+                                <option value="women's clothes">Women's clothes</option>
+                                <option value="shoes">Shoes</option>
+                            </select>
                             <label htmlFor="price">Price per item:</label>
                             <input
                                 type="number"
@@ -84,16 +89,18 @@ console.log(prodDetails)
                                 required />
                         </div>
                     </div>
+                    {message && <p className={message === "Product added successfully"?  'valid validvalid' : "invalid validvalid"}>{message}</p>}
                     <div className='tt-area'>
                         <label htmlFor="description">Description:</label>
-                        <textarea 
-                        name="description"
-                        id="description"
-                        value={prodDetails.description}
-                        onChange={handleOnchange}
+                        <textarea
+                            name="description"
+                            id="description"
+                            value={prodDetails.description}
+                            onChange={handleOnchange}
                         ></textarea> <br />
                     </div>
-                    <button>Add Product</button>
+                    
+                    {message ==="Product added successfully"? <button type='button' onClick={()=>{setAddProd(false)}}>Exit</button> :<button>Add Product</button> }
                 </form>
             </div>
         </div>

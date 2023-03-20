@@ -12,3 +12,25 @@
 .sold-out{
     color:red;
 }
+.product-name{
+    height: 100%;
+    display: flex;
+}
+.product-image{
+    height: 50%;
+    width: 5vh;
+    border-radius:3px;
+    margin-right: 1vw;
+}
+
+.validvalid{
+    top: 78%;
+    
+}
+.category-rep{
+    background-color: #E9EBEB;
+}
+
+.lineline-card {
+    width: 50vh;
+}
