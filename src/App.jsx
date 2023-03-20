@@ -10,6 +10,7 @@ import ErrorPage from './pages/error-page';
 import Products from './components/products';
 import Reports from './components/reports';
 import Account from './components/account';
+import Dashboard from './components/dashboard';
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
         <Route path={'/'} element={<Login />} />
         <Route path={'/admindashboard'} element={<Admindashboard />}>
           <Route index element={<Sales />} />
+          <Route path='dashboard' element={<Dashboard />} />
           <Route path='sales' element={<Sales />} />
           <Route path='products' element={<Products />} />
           <Route path='users' element={<Users />} />
