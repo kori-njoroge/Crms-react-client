@@ -8,6 +8,8 @@ import Admindashboard from './pages/admin-dashboard';
 import Login from './pages/login';
 import ErrorPage from './pages/error-page';
 import Products from './components/products';
+import Reports from './components/reports';
+import Account from './components/account';
 
 
 function App() {
@@ -20,6 +22,8 @@ function App() {
           <Route path='sales' element={<Sales />} />
           <Route path='products' element={<Products />} />
           <Route path='users' element={<Users />} />
+          <Route path='reports' element={<Reports />} />
+          <Route path='account' element={<Account />} />
         </Route>
         <Route path='*' element={<ErrorPage />} />
       </Routes>

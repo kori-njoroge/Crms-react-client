@@ -37,7 +37,7 @@ export default function Navbar() {
                 <i className="fa-solid fa-bell"></i>
                 <img src={member} alt="member logo" />
                 <div className="name-title">
-                    <h5>{user?.username}</h5>
+                    <h5>{user?.fullname}</h5>
                     <h6>{user?.title}</h6>
                 </div>
                 {chevDown ?

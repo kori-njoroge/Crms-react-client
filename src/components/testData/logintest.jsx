@@ -14,7 +14,7 @@ export const users = [
     joinDate: '2022-05-21',
     fullname: 'Jane Smith',
     email: 'user2@example.com',
-    title: 'Admin',
+    title: 'customer',
     password: 'fghij67890'
   },
   {

@@ -4,13 +4,26 @@ import React, { useState, useEffect } from 'react';
 import '../styles/products.css'
 import AddProduct from './add-product-modal';
 import { products } from './testData/products-test'
+import TextWithReadMore from './textwithreadmore';
 
 export default function Products() {
     const [addProd, setAddProd] = useState(false);
-    const [prods, setProducts] = useState(products);
+    const [prods, setProducts] = useState([]);
+    // const [prods, setProducts] = useState(products);
     const [search, setSearch] = useState('');
     const [filter, setFilter] = useState('');
     const [showPopUp, setShowPopUp] = useState(prods?.map(() => false));
+
+
+    useEffect(() => {
+        async function fetchData() {
+
+            let data1 = await fetch('https://fakestoreapi.com/products')
+            const res =  await data1.json()
+            setProducts(res)
+        }
+        fetchData();
+    }, [])
 
     useEffect(() => {
         function setFilterfunc() {
@@ -112,8 +125,9 @@ export default function Products() {
                     }).map((item, index) => (
                         <tr className='actions-row' key={item.id}>
                             <td className='sold-ou'>{item.id}</td>
-                            <td className='user--name'>{item.name}</td>
-                            <td className='table-desc'>{item.description}</td>
+                            <td className='product-name'><img className='product-image' src={item.image} alt="product " /> {item.title}</td>
+                            {/* <td className='user--name'><img src={item.image} alt="product " />{item.name}</td> */}
+                            <td className='table-desc'> <TextWithReadMore text ={item.description}/></td>
                             <td>{item.category}</td>
                             <td>{item.status}</td>
                             <td className={item.remainingPieces === 0 ? "sold-out actions" : 'actions'}>{item.remainingPieces}</td>
@@ -126,7 +140,7 @@ export default function Products() {
                                     <hr className='hrhr' />
                                     {(item.status === 'Pending Approval') && <>
                                         <p
-                                            onClick={()=>{approveProduct(item.id)}}>Approve product</p>
+                                            onClick={() => { approveProduct(item.id) }}>Approve product</p>
                                         <hr className='hrhr' />
                                     </>}
                                     <p>Update details</p>
