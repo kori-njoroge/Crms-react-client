@@ -18,7 +18,10 @@ export default function Sidebar() {
     return (
         <div className='sidebar'>
             <h1>Menu</h1>
+            {/* <h1><i className="fa-solid fa-bars"></i></h1> */}
             <div className="sidebar-links">
+                <hr />
+                <NavLink to={'dashboard'} ><h4> <i className="fa-solid fa-house"></i>Dashboard</h4></NavLink>
                 <hr />
                 <NavLink to={'sales'} ><h4> <i className="fa-solid fa-sleigh"></i>Sales</h4></NavLink>
                 <hr />
