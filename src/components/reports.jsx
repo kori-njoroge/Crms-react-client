@@ -1,5 +1,3 @@
-// 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
-
 import React, { useState } from 'react'
 import { Line, Doughnut } from 'react-chartjs-2';
 import {
@@ -36,13 +34,13 @@ export default function Reports() {
         period2: '',
         period3: ''
     })
-    const [formDate, setformDate] = useState(
-        {
-            from: '',
-            to: '',
+    // const [formDate, setformDate] = useState(
+    //     {
+    //         from: '',
+    //         to: '',
 
-        }
-    );
+    //     }
+    // );
 
     function handleOnChange(event) {
         const { name, value } = event.target;
