@@ -64,7 +64,7 @@ export default function Login() {
                 setMessage('Login successful')
                 window.localStorage.setItem('login', true)
                 setTimeout(() => {
-                    navigate('/admindashboard/sales')
+                    navigate('/admindashboard/dashboard')
                 }, 2000);
             }
         }
