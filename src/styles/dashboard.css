@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=Farsan&display=swap');
+
+.dasboard-main {
+    padding: 0vh 2vw;
+}
+
+.user-card {
+    border: 1px solid #01A4AA;
+    width: fit-content;
+    padding: 2vh;
+    font-family: Farsan, sans-serif;
+    padding-bottom: 2.5vh;
+    border-radius: 3px;
+    display: inline-block;
+}
+
+.user-card p {
+    margin: 0;
+    font-size: 18px;
+}
+
+.user-card p:nth-child(2) {
+    font-weight: bold;
+    font-size: 25px;
+    text-transform: uppercase;
+    color: #01A4AA;
+}
+
+.user-card small {
+    float: right;
+    margin-bottom: 1vh;
+}
+
+.dashboard-links {
+    float: right;
+
+}
+.dashboard-links button{
+    height: 5vh;
+    margin: 0vh .6vw;
+    border: .1vh solid #01A4AA;
+    border-radius: 4px;
+    padding: 0vh .5vw;
+    cursor: pointer;
+
+}
+.dashboard-links button:hover{
+    color: #01A4AA;
+}
+
+/* dash cards */
+.dashhcards {
+    width: fit-content;
+    margin-top: 4vh;
+    display: flex;
+    flex-direction: column;
+    gap: 2vh;
+}
+
+
+.dashhcards>div {
+    background-color: #E9EBEB;
+    text-align: center;
+    border-radius: 5px;
+}
+
+
+.sum-card-dash1 {
+    text-align: left;
+    padding: 0vh 1vw;
+}
+
+.sum-card-dash1>* {
+    text-align: left;
+}
+
+.sum-card-dash1 i {
+    margin-top: 2vh;
+    font-size: 23px;
+    text-align: left;
+}
+
+.sum-card-dash1 h4 {
+    font-size: 15px;
+    display: inline-block;
+    margin-left: 1vw;
+}
+
+.sum-card-dash1 p {
+    float: right;
+    font-size: 25px;
+    margin-bottom: 0;
+}
+
+.div-stats-dash {
+    display: flex;
+    gap: 2vh;
+    height: fit-content;
+}
+
+.catcat-graph {
+    width: 75%;
+    margin: auto;
+    height: 89vh;
+}
+
+.catcat-graph>* {
+    height: 83%;
+}
+
+.catcat-graph h4{
+    padding: 1vh;
+}
