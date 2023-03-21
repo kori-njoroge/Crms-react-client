@@ -1,7 +1,7 @@
 export const products = [
     {
         id: "3RC8",
-        name: "Samsung Galaxy S21",
+        title: "Samsung Galaxy S21",
         dateAdded: "2022-11-09",
         description: "6.2 inch, 128GB, 5G, Phantom Gray",
         remainingPieces: 8,
@@ -13,7 +13,7 @@ export const products = [
     },
     {
         id: "5CH7",
-        name: "LG OLED TV",
+        title: "LG OLED TV",
         dateAdded: "2022-11-09",
         description: "65 inch, 4K UHD, Smart TV, ThinQ AI",
         remainingPieces: 3,
@@ -24,7 +24,7 @@ export const products = [
     },
     {
         id: "1AC2",
-        name: "Whirlpool Refrigerator",
+        title: "Whirlpool Refrigerator",
         dateAdded: "2022-11-09",
         description: "French Door, 25 cu. ft., Stainless Steel",
         remainingPieces: 0,
@@ -35,7 +35,7 @@ export const products = [
     },
     {
         id: "9PD4",
-        name: "Sony PlayStation 5",
+        title: "Sony PlayStation 5",
         dateAdded: "2022-11-09",
         description: "Disc Version, 825GB SSD",
         remainingPieces: 5,
@@ -46,7 +46,7 @@ export const products = [
     },
     {
         id: "7XE6",
-        name: "Dell Inspiron 15",
+        title: "Dell Inspiron 15",
         dateAdded: "2022-11-09",
         description: "15.6 inch, Intel Core i7, 16GB RAM, 512GB SSD ",
         remainingPieces: 10,
@@ -57,7 +57,7 @@ export const products = [
     },
     {
         id: "2LF9",
-        name: "HP OfficeJet Pro Printer",
+        title: "HP OfficeJet Pro Printer",
         dateAdded: "2022-11-09",
         description: "All-in-One, Wireless, Fax, Scan, Copy",
         remainingPieces: 2,
@@ -68,7 +68,7 @@ export const products = [
     },
     {
         id: "4JG1",
-        name: "Apple MacBook Pro",
+        title: "Apple MacBook Pro",
         dateAdded: "2022-11-09",
         description: "13 inch, M1 Chip, 8-core CPU, 8-core GPU, 512GB SSD",
         remainingPieces: 4,
@@ -79,7 +79,7 @@ export const products = [
     },
     {
         id: "8VZ3",
-        name: "Bose QuietComfort 35 II",
+        title: "Bose QuietComfort 35 II",
         dateAdded: "2022-11-09",
         description: "Wireless, Noise Cancelling, Over-Ear Headphones",
         remainingPieces: 0,
@@ -90,7 +90,7 @@ export const products = [
     },
     {
         id: "6RD5",
-        name: "Samsung Galaxy Tab S7",
+        title: "Samsung Galaxy Tab S7",
         dateAdded: "2022-11-09",
         description: "11 inch, 256GB, Wi-Fi, Mystic Black",
         remainingPieces: 7,
@@ -98,4 +98,5 @@ export const products = [
         category: "Electronics",
         status: "In Market",
         image:"https://www.notebookcheck.net/uploads/tx_nbc2/4_3_Teaser_Samsung_Galaxy_Tab_S7_SM-T870_MysticBronze.jpg"
-    },]
+    },
+]

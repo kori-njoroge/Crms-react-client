@@ -127,7 +127,7 @@ export default function Products() {
                             <td className='sold-ou'>{item.id}</td>
                             <td className='product-name'><img className='product-image' src={item.image} alt="product " /> {item.title}</td>
                             {/* <td className='user--name'><img src={item.image} alt="product " />{item.name}</td> */}
-                            <td className='table-desc'> <TextWithReadMore text ={item.description}/></td>
+                            <td className='table-desc'> <TextWithReadMore text ={item.description} characters ={100}/></td>
                             <td>{item.category}</td>
                             <td>{item.status}</td>
                             <td className={item.remainingPieces === 0 ? "sold-out actions" : 'actions'}>{item.remainingPieces}</td>
