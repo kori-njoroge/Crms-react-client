@@ -4,9 +4,9 @@ function TextWithReadMore(props) {
     const [showFullText, setShowFullText] = useState(false);
 
     const text = props.text;
-    const maxChars = props.maxChars || 100; // set a default maximum number of characters
+    const maxChars = props.maxChars || props.characters; // set a default maximum number of characters
 
-    if (text.length <= maxChars) {
+    if (text?.length <= maxChars) {
         // If the text is shorter than the maximum, just display it without a "read more" link
         return <p>{text}</p>;
     } else if (showFullText) {
