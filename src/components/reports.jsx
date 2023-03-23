@@ -47,7 +47,7 @@ export default function Reports() {
         const { name, value } = event.target;
         setPeriod(prevState => {
             return {
-                ...period,
+                ...prevState,
                 [name]: value
             }
         })
@@ -64,7 +64,7 @@ export default function Reports() {
                 <div className="visuals-card">
                     <div className="visual-head">
                         <p>Summary</p>
-                        <select name="period1" id="period" value={period} onChange={handleOnChange}>
+                        <select name="period1" id="period" value={period.period1} onChange={handleOnChange}>
                             <option value="This week">This week</option>
                             <option value="This month">This Month</option>
                             <option value="Quater year">Quater year</option>
@@ -114,7 +114,7 @@ export default function Reports() {
                 <div className="visuals-card">
                     <div className="visual-head">
                         <p>Sales summary</p>
-                        <select name="period2" id="period" value={period} onChange={handleOnChange}>
+                        <select name="period2" id="period" value={period.period2} onChange={handleOnChange}>
                             <option value="This week">This week</option>
                             <option value="This month">This Month</option>
                             <option value="Quater year">Quater year</option>
@@ -140,7 +140,7 @@ export default function Reports() {
                 <div className="visuals-card">
                     <div className="visual-head">
                         <p>Customer summary</p>
-                        <select name="period3" id="period" value={period} onChange={handleOnChange}>
+                        <select name="period3" id="period" value={period.period3} onChange={handleOnChange}>
                             <option value="This week">This week</option>
                             <option value="This month">This Month</option>
                             <option value="Quater year">Quater year</option>

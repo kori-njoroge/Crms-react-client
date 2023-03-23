@@ -36,7 +36,7 @@ export default function Makesale({ selectedProds, search,setSelectedProds }) {
                     </tr>
                 </thead>
                 <tbody >
-                    {theProducts.length && theProducts?.filter((item) => {
+                    {theProducts.length>0 && theProducts?.filter((item) => {
                         return search.toLowerCase() === "" ? item : item.category.toLowerCase().includes(search)
                     }).map((item, index) => (
                         <tr className='actions-row' key={index}>

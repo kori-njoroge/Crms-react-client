@@ -19,7 +19,7 @@ export default function Products() {
         async function fetchData() {
 
             let data1 = await fetch('https://fakestoreapi.com/products')
-            const res =  await data1.json()
+            const res = await data1.json()
             setProducts(res)
         }
         fetchData();
@@ -126,8 +126,7 @@ export default function Products() {
                         <tr className='actions-row' key={item.id}>
                             <td className='sold-ou'>{item.id}</td>
                             <td className='product-name'><img className='product-image' src={item.image} alt="product " /> {item.title}</td>
-                            {/* <td className='user--name'><img src={item.image} alt="product " />{item.name}</td> */}
-                            <td className='table-desc'> <TextWithReadMore text ={item.description} characters ={100}/></td>
+                            <td className='table-desc'> <TextWithReadMore text={item.description} characters={20} /></td>
                             <td>{item.category}</td>
                             <td>{item.status}</td>
                             <td className={item.remainingPieces === 0 ? "sold-out actions" : 'actions'}>{item.remainingPieces}</td>

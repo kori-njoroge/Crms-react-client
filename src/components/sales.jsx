@@ -4,7 +4,7 @@ import Makesale from './makesale';
 import { products } from './testData/products-test';
 
 export default function Sales() {
-    const [makeSale, setMakeSale] = useState(!false);
+    const [makeSale, setMakeSale] = useState(false);
     const[message, setMessage]= useState('');
     const[selectedProds, setSelectedProds]= useState([])
     const [search, setSearch] = useState('');
