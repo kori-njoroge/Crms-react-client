@@ -24,15 +24,15 @@ export default function Dashboard() {
             <div className='dasboard-main'>
                 <div className="user-card">
                     <p>Welcome</p>
-                    <p>{user?.fullname}!</p>
-                    <small>{user?.title}</small>
+                    <p>{user?.full_name}!</p>
+                    <small>{user?.role}</small>
                 </div>
                 <div className="dashboard-links">
-                    <button onClick={()=>{navigate('/admindashboard/users')}}> Add user&nbsp; <i className="fa-solid fa-user-plus"></i></button>
-                    <button onClick={()=>{navigate('/admindashboard/sales')}}>Make Sale&nbsp; <i className="fa-solid fa-plus"></i></button>
-                    <button onClick={()=>{navigate('/admindashboard/users')}}>Users&nbsp; <i className="fa-solid fa-users"></i></button>
-                    <button onClick={()=>{navigate('/admindashboard/products')}}>Add Product&nbsp; <i className="fa-solid fa-plus"></i> </button>
-                    <button onClick={()=>{navigate('/admindashboard/account')}}>My Account &nbsp; <i className="fa-solid fa-user-gear"></i></button>
+                    <button onClick={()=>{navigate('/admin/users')}}> Add user&nbsp; <i className="fa-solid fa-user-plus"></i></button>
+                    <button onClick={()=>{navigate('/admin/sales')}}>Make Sale&nbsp; <i className="fa-solid fa-plus"></i></button>
+                    <button onClick={()=>{navigate('/admin/users')}}>Users&nbsp; <i className="fa-solid fa-users"></i></button>
+                    <button onClick={()=>{navigate('/admin/products')}}>Add Product&nbsp; <i className="fa-solid fa-plus"></i> </button>
+                    <button onClick={()=>{navigate('/admin/account')}}>My Account &nbsp; <i className="fa-solid fa-user-gear"></i></button>
                 </div>
                 <div className="div-stats-dash">
                     <DashCards />
