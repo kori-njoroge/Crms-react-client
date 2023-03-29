@@ -18,8 +18,8 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path={'/'} element={<Login />} />
-        <Route path={'/admindashboard'} element={<Admindashboard />}>
-          <Route index element={<Sales />} />
+        <Route path={'/admin'} element={<Admindashboard />}>
+          <Route index element={<Dashboard />} />
           <Route path='dashboard' element={<Dashboard />} />
           <Route path='sales' element={<Sales />} />
           <Route path='products' element={<Products />} />
