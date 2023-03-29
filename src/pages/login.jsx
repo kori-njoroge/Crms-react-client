@@ -1,17 +1,17 @@
 import React, { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link,  useNavigate } from 'react-router-dom'
+import axios from 'axios'
 
-
-
-import { users } from '../components/testData/logintest'
+// import { users } from '../components/testData/logintest'
 import '../styles/login.css'
 import logo from '../assets/logo.png'
+import { apiusers } from '../components/api-links'
 
 export default function Login() {
-
+    const [loading, setLoading] = useState(false)
+    const [user, setUser] = useState({})
 
     const [isFormValid, setIsFormValid] = useState(false);
-
 
     const navigate = useNavigate()
     const [showPass, setShowPass] = useState(false);
@@ -47,7 +47,7 @@ export default function Login() {
 
     }
 
-    function handleOnfocus(){
+    function handleOnfocus() {
         setMessage('')
     }
 
@@ -55,28 +55,36 @@ export default function Login() {
 
     function submitLoginData(event) {
         event.preventDefault();
-        if (loginData.email && loginData.password) {
-            const userPresent = users.find(user => user.email === loginData.email);
-            window.localStorage.setItem('user',JSON.stringify(userPresent))
-            if (userPresent === undefined) setMessage('User not found')
-            else if (userPresent.password !== loginData.password) setMessage('Check your Credentials')
-            else {
-                setMessage('Login successful')
-                window.localStorage.setItem('login', true)
-                setTimeout(() => {
-                    navigate('/admindashboard/dashboard')
-                }, 2000);
+        setLoading(true)
+        axios.post(`${apiusers}/login`, {
+            email: loginData.email,
+            password: loginData.password
+        }).then(respon => {
+            setLoading(false)
+            setMessage(respon.data?.response)
+            if (respon.data?.response === 'Login successful') {
+                setUser(respon.data.user)
+                window.localStorage.setItem('token', respon.data?.token)
+                window.localStorage.setItem('user',JSON.stringify(respon.data.user))
+                if(user.role.toLowerCase() === 'staff'){
+                    navigate('/staff_dash')
+                }else{
+                    navigate('/admin/dashboard')
+                }
             }
-        }
+        }).catch(err => {
+            setLoading(false)
+            setMessage(err.response?.data?.message)
+        })
     }
 
-
-
+    console.log("user", user)
 
     return (
         <div className='loginBody'>
             <div className="logincard">
                 <img src={logo} alt="company logo" />
+
                 <div className="cartTop">
                     <p>sign in</p>
                 </div>
@@ -111,6 +119,10 @@ export default function Login() {
                             }
                             }></i>}
                         {message && <p className={message === 'Login successful' ? 'valid' : 'invalid'}>{message}</p>}
+                        {loading ? <div className='donut-wrapper donut-login'>
+                            <div className='donut multi'></div>
+                        </div>
+                            : ""}
 
                     </div>
                     <div className="rememberMe">
