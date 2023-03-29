@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import {  useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 import '../styles/navbar.css'
 import logo from '../assets/logo.png'
@@ -31,14 +31,14 @@ export default function Navbar() {
         <div className='navbar'>
             <div className="nav-left">
                 <img src={logo} alt="company logo" />
-                <h1>crms</h1>
+                <h1>clientHive</h1>
             </div>
             <div className="nav-right">
                 <i className="fa-solid fa-bell"></i>
                 <img src={member} alt="member logo" />
                 <div className="name-title">
-                    <h5>{user?.fullname}</h5>
-                    <h6>{user?.title}</h6>
+                    <h5>{user?.full_name}</h5>
+                    <h6>{user?.role}</h6>
                 </div>
                 {chevDown ?
                     <i className="fa-solid fa-chevron-right"
@@ -50,10 +50,11 @@ export default function Navbar() {
 
                 {chevDown &&
                     (<div className='dropDown' >
-                        <p onClick={()=>{navigate('/admindashboard/account')}}><i className="fa-solid fa-gear"></i> Settings</p>
+                        <p onClick={() => { navigate('/admindashboard/account') }}><i className="fa-solid fa-gear"></i> Settings</p>
                         <hr />
                         <p onClick={() => {
                             window.localStorage.setItem('login', false)
+                            window.localStorage.clear()
                             setTimeout(() => {
                                 navigate('/')
                             }, 500);
