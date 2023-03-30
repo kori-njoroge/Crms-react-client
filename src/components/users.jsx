@@ -1,21 +1,47 @@
 import React, { useState, useEffect } from 'react'
+import axios from 'axios'
 
 import '../styles/users.css'
-import { users } from './testData/logintest'
 import rick from '../assets/rick.png'
 import AddUserModal from './addusermodal'
+import { apiusers } from './api-links'
 
 export default function Users() {
+    const [loading, setLoading] = useState(true)
     const [adduser, setAdduser] = useState(false)
-    const [members, setMembers] = useState(users)
+    const [users, setUsers] = useState([])
+    const [members, setMembers] = useState([])
     const [search, setSearch] = useState('');
     const [showPopUp, setShowPopUp] = useState(members?.map(() => false));
     const [filter, setFilter] = useState("");
 
+
+    useEffect(() => {
+        let token = window.localStorage.getItem('token')
+        setLoading(true)
+        async function fetchData() {
+            axios.get(`${apiusers}`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                }
+            }
+            ).then(response => {
+                setUsers(response.data)
+                setMembers(response.data)
+                setLoading(false)
+                console.log(response.data)
+            }).catch(err => {
+                setLoading(false)
+            })
+        }
+        fetchData();
+    }, [])
+
     useEffect(() => {
         function setFilterfunc() {
             if (filter.trim()) {
-                setMembers(users.filter(user => user.title === filter))
+                setMembers(users.filter(user => user.role.toLowerCase() === filter))
             } else {
                 setMembers(users)
             }
@@ -50,8 +76,8 @@ export default function Users() {
         <div className='modal-container'>
             <div className="filters">
                 <h5 className={filter === "" ? "h5active" : ""} onClick={() => { setFilter(``) }} >All Users</h5>
-                <h5 className={filter === "super Admin" ? "h5active" : ""} onClick={() => { setFilter(`super Admin`) }} >Super Admins</h5>
-                <h5 className={filter === "Admin" ? "h5active" : ""} onClick={() => { setFilter(`Admin`) }} >Admins</h5>
+                <h5 className={filter === "super Admin" ? "h5active" : ""} onClick={() => { setFilter(`super admin`) }} >Super Admins</h5>
+                <h5 className={filter === "Admin" ? "h5active" : ""} onClick={() => { setFilter(`admin`) }} >Admins</h5>
                 <h5 className={filter === "staff" ? "h5active" : ""} onClick={() => { setFilter(`staff`) }} >Staff</h5>
                 <h5 className={filter === "customer" ? "h5active" : ""} onClick={() => { setFilter(`customer`) }} >Customers</h5>
             </div>
@@ -84,16 +110,16 @@ export default function Users() {
                         </tr>
                     </thead>
                     <tbody>
-                        {members && members.filter((user) => {
-                            return search.toLowerCase() === "" ? user : user.fullname.toLowerCase().includes(search)
+                        {members ? members.filter((user) => {
+                            return search.toLowerCase() === "" ? user : user.full_name.toLowerCase().includes(search)
                         }).map((user, index) => (
                             <tr className='actions-row' key={user.id}>
                                 <td>{user.id}</td>
-                                <td className='user--name'><img src={rick} alt="member logo" />{user.fullname}</td>
-                                <td>{user.phonenumber}</td>
+                                <td className='user--name'><img src={rick} alt="member logo" />{user.full_name}</td>
+                                <td>{user.phone}</td>
                                 <td>{user.email}</td>
-                                <td>{user.title}</td>
-                                <td>{user.joinDate}</td>
+                                <td>{user.role}</td>
+                                <td>{(user.joined_at).split('T')[0]}</td>
                                 <td className='actions' onClick={() => { handleEllipsisClick(index) }}><i className="fa-solid fa-ellipsis-vertical" ></i></td>
                                 {showPopUp[index] &&
                                     <div className='action-drop'>
@@ -106,9 +132,19 @@ export default function Users() {
                                     </div>}
                             </tr>
                         ))
-                        }
+                            : <tr>
+                                <td></td>
+                                <td></td>
+                                <td>No</td>
+                                <td>Users</td>
+                                <td></td>
+                            </tr>}
                     </tbody>
                 </table>
+                {loading ? <div className='donut-wrapper donut-users'>
+                    <div className='donut multi'></div>
+                </div>
+                    : ""}
             </div>
             {adduser && <AddUserModal
                 setAdduser={setAdduser}
