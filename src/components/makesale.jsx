@@ -3,10 +3,12 @@ import TextWithReadMore from './textwithreadmore';
 
 import '../styles/sales.css'
 import Checkout from './checkout';
-import { products } from './testData/products-test';
+import axios from 'axios';
+import { apiproducts } from './api-links';
 
 
 export default function Makesale({ selectedProds, search,setSelectedProds }) {
+    const[products,setTheProducts]= useState([])
     const [theProducts, setProducts] = useState([]);
     const [checkout, setCheckout] = useState(!true);
     useEffect(() => {
@@ -16,6 +18,25 @@ export default function Makesale({ selectedProds, search,setSelectedProds }) {
             setProducts(prods.filter(prod => prod !== null));
         }
     }, [selectedProds]);
+
+    useEffect(() => {
+        let token = window.localStorage.getItem('token')
+        console.log(token)
+        async function fetchData() {
+            axios.get(`${apiproducts}/all`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                }
+            }
+            ).then(response => {
+                setTheProducts(response.data)
+            }).catch(err => {
+                console.log(err)
+            })
+        }
+        fetchData();
+    }, [])
 
 
     return (
@@ -28,7 +49,7 @@ export default function Makesale({ selectedProds, search,setSelectedProds }) {
                         <td>#</td>
                         <td>Name</td>
                         <td>Description</td>
-                        <td>category</td>
+                        <td>category Id</td>
                         <td>Price</td>
                         <td>Items</td>
                         <td>Total</td>
@@ -41,9 +62,11 @@ export default function Makesale({ selectedProds, search,setSelectedProds }) {
                     }).map((item, index) => (
                         <tr className='actions-row' key={index}>
                             <td className='sold-ou'>{item.id}</td>
-                            <td className='product-name'><img className='product-image' src={item.image} alt="product " /> {item.title}</td>
+                            <td className='product-name'>
+                                {/* {<img className='product-image' src={item.image} alt="product " /> } */}
+                                {item.name}</td>
                             <td className='table-desc'> <TextWithReadMore text={item?.description} characters={20} /></td>
-                            <td>{item.category}</td>
+                            <td>{item.category_id}</td>
                             <td className='actions'>{item.price}</td>
                             <td >{1}</td>
                             <td className='actions'>{item.price}</td>
