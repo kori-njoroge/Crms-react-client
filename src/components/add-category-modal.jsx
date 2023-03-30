@@ -78,7 +78,7 @@ export default function AddCategory({ setAddCategory }) {
             <div className="info-container">
                 <img src={logo} alt="company logo" />
                 <i className="fa-solid fa-x" onClick={() => { setAddCategory(false) }}></i>
-                <h5>Enter product details</h5>
+                <h5>Enter category details</h5>
                 <form className='userdet-form prod-det-form' onSubmit={handleSubmit} >
                     <div className="div">
                         <div className="">
