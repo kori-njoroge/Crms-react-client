@@ -11,8 +11,6 @@ export default function Sidebar() {
         let user = JSON.parse(window.localStorage.getItem('user'));
         setUser(user);
     }, [])
-    console.log(user)
-
 
 
     return (
@@ -27,9 +25,9 @@ export default function Sidebar() {
                 <hr />
                 <NavLink to={'products'}><h4> <i className="fas fa-tag"></i>Products</h4></NavLink>
                 <hr />
-                <NavLink to={'users'}><h4><i className="fa-solid fa-users"></i>Users</h4></NavLink>
+                <NavLink to={'users'}><h4><i className="fa-solid fa-users"></i>{user.role?.toLowerCase() === 'staff' ? 'Customers' : 'Users'}</h4></NavLink>
                 <hr />
-                {(user.title === 'super Admin' || user.title === 'Admin') ?
+                {user && (user.role?.toLowerCase() === ' super admin' || user.role?.toLowerCase === 'admin') ?
                     <>
                         <NavLink to={'reports'}><h4> <i className="fa-solid fa-chart-line"></i>Reports</h4></NavLink>
                         <hr />
