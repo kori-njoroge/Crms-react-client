@@ -11,31 +11,42 @@ body {
 }
 
 /* Loading Sections */
-.donut-wrapper{
+.donut-wrapper {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.donut{
+.donut {
     width: 3rem;
     height: 3rem;
     /* margin: 5rem; */
     border-radius: 50%;
     /* border: 0.3rem solid #4492a5; */
     border: 0.3rem solid #003d4c44;
-    border-top-color:#003d4c ;
+    border-top-color: #003d4c;
     animation: 1s spin infinite linear;
     animation-duration: 3s;
 }
 
-.multi{
+.donut-product {
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    border: 0.3rem solid #4492a5;
+    border: 0.2rem solid #003d4c44;
+    border-top-color: #003d4c;
+    animation: 1s spin infinite linear;
+    animation-duration: 3s;
+}
+
+.multi {
     border-bottom-color: #003d4c;
 }
 
-@keyframes spin{
-    to{
+@keyframes spin {
+    to {
         transform: rotate(360deg);
     }
 }

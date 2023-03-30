@@ -11,6 +11,8 @@ import Products from './components/products';
 import Reports from './components/reports';
 import Account from './components/account';
 import Dashboard from './components/dashboard';
+import StaffDashboard from './pages/staff/staff-dashboard';
+import Customers from './components/customers';
 
 
 function App() {
@@ -27,9 +29,18 @@ function App() {
           <Route path='reports' element={<Reports />} />
           <Route path='account' element={<Account />} />
         </Route>
+        <Route path={'/staff'} element={<StaffDashboard />}>
+          <Route path='dashboard' element={<Dashboard />} />
+          <Route path='sales' element={<Sales />} />
+          <Route path='products' element={<Products />} />
+          <Route path='users' element={<Customers />} />
+          <Route path='account' element={<Account />} />
+        </Route>
+
+        {/* </Route> */}
         <Route path='*' element={<ErrorPage />} />
-      </Routes>
-    </BrowserRouter>
+      </Routes >
+    </BrowserRouter >
   );
 }
 
