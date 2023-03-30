@@ -51,6 +51,7 @@
     width: 30%;
     border: .1vh solid rgb(245, 141, 141);
     border-radius: 5px;
+    /* padding-bottom: 4vh; */
 }
 
 .edit-details :nth-child(1) {
@@ -117,7 +118,6 @@
 
 .edit-details-valid{
     top: 75%;
-    border: 1px solid green;
     padding: 1vh;
     border-radius: 3px;
     left: 10%;
@@ -125,16 +125,18 @@
     text-align: center;
     width: fit-content;
     margin: auto;
+    color: #00994d;
+    border: 1px solid;
+    font-size: 12px;
 }
 
 .edit-details-invalid{
-    top: 80%;
-    border: 1px solid red;
     padding: 1vh;
     border-radius: 3px;
-    left: 10%;
-    right:10%;
     text-align: center;
     width: fit-content;
     margin: auto;
+    font-size: 12px;
+    color: red;
+    border: 1px solid red;
 }

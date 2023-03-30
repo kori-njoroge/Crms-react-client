@@ -109,8 +109,10 @@ export default function Account() {
                     setMessage(error.response.data.message)
                 })
         }
-        else if (newData.password) {
+        else if (newData.password?.length) {
+            console.log("first")
             if (newData.password === newData.conPass) {
+                console.log('here misteakently')
                 axios.patch(`${apiusers}/update-user`,
                     {
                         id: user?.id,
@@ -136,7 +138,8 @@ export default function Account() {
                         console.log(error.response.data.message)
                         setMessage(error.response.data.message)
                     })
-            } else if (newData.phone?.length) {
+            } else {
+                console.log("here we are")
                 setMessage('Passwords do not match')
             }
         } else {
@@ -168,7 +171,7 @@ export default function Account() {
                 </div>
                 {
                     update &&
-                    <div className="edit-details" style={{ position: 'relative' }}>
+                    <div className="edit-details" >
                         <div >
                             <p className={selection.password && 'selected'} onClick={() => { switchDetails(`password`) }}>Password</p>
                             <p className={selection.phone && 'selected'} onClick={() => { switchDetails(`phone`) }}>Phone</p>
@@ -220,7 +223,9 @@ export default function Account() {
                                     onChange={handleOnchange} />
                             </div>}
                         <button onClick={handleSubmit}>Update Details</button>
-                        {message && <p className={message === 'User details updated successfully' ? 'valid edit-details-valid' : 'invalid edit-details-invalid'}>{message}</p>}
+                        <div style={{ position: 'relative' }}>
+                            {message && <p className={message === 'User details updated successfully' ? 'edit-details-valid' : 'edit-details-invalid'}>{message}</p>}
+                        </div>
                     </div>
                 }
 
