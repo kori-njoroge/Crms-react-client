@@ -163,7 +163,7 @@ export default function Products() {
                                     <i className="fa-solid fa-x fa-actions" onClick={() => { handleEllipsisClose(index) }}></i>
                                     <p>More details</p>
                                     <hr className='hrhr' />
-                                    {(item.status === 'Pending Approval') && <>
+                                    {(item.approved === false) && <>
                                         <p
                                             onClick={() => { approveProduct(item.id) }}>Approve product</p>
                                         <hr className='hrhr' />
