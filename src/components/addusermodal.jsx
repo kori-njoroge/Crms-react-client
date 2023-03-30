@@ -17,18 +17,16 @@ export default function AddUserModal({ setAdduser, user }) {
             title: 'customer'
         }
     )
-
     function handleOnchange(event) {
-        event.preventDefault()
-        console.log(event)
-        const { name, value, type } = event.target;
+        const { name, value, type, checked } = event.target
         setUserDetails(prevState => {
             return {
                 ...prevState,
-                [name]: type === "checkbox" ? event.target.checked : value
+                [name]: type === "checkbox" ? checked : value
             }
         })
     }
+
 
     function handleSubmit(event) {
         event.preventDefault();
@@ -70,17 +68,17 @@ export default function AddUserModal({ setAdduser, user }) {
         };
     }, [setAdduser]);
 
-    function handleOnFocus(){
+    function handleOnFocus() {
         setMessage('')
     }
-console.log(userDetails)
+    console.log(userDetails)
 
     return (
         <div className='modal'>
             <div className="info-container" >
                 <img src={logo} alt="company logo" />
                 <h5>Enter user details</h5>
-                {message && <p className={message=== 'User created succesfully'? 'valid':'invalid'}>{message}</p>}
+                {message && <p className={message === 'User created succesfully' ? 'valid' : 'invalid'}>{message}</p>}
                 <i className="fa-solid fa-x" onClick={() => { setAdduser(false) }}></i>
                 <form className='userdet-form' onSubmit={handleSubmit} >
                     <div className="div">
@@ -100,15 +98,28 @@ console.log(userDetails)
                                 type="tel"
                                 name="phone"
                                 id="number"
-                                value={userDetails.number}
+                                value={userDetails.phone}
                                 onChange={handleOnchange}
                                 placeholder='254706306415'
                                 onFocus={handleOnFocus}
+                                maxLength={12}
                                 required />
                             <div className="gender" style={{ display: 'flex', fontSize: '13px', textAlign: 'left', marginTop: '1.5vh' }}>
                                 Gender:
-                                <input onChange={handleOnchange} type="radio" name="gender" value='male' id="" required/>Male
-                                <input onChange={handleOnchange} type="radio" name="gender" value='female' id="" required/>Female
+                                <input
+                                    onChange={handleOnchange}
+                                    type="radio"
+                                    name="gender"
+                                    value="male"
+                                    checked={userDetails.gender === "male"}
+                                    required />Male
+                                <input
+                                    onChange={handleOnchange}
+                                    type="radio"
+                                    name="gender"
+                                    value="female"
+                                    checked={userDetails.gender === "female"}
+                                    required />Female
                             </div>
                         </div>
                         <div className="">
@@ -145,7 +156,7 @@ console.log(userDetails)
                         <div className='donut-product multi'></div>
                     </div>
                         : ""}
-                    {message=== 'User created succesfully' ? <button type='button' onClick={() => { setAdduser(false) }}>Exit</button> : <button>Add User</button>}
+                    {message === 'User created succesfully' ? <button type='button' onClick={() => { setAdduser(false) }}>Exit</button> : <button>Add User</button>}
                 </form>
             </div>
         </div>
