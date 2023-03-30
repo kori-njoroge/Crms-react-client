@@ -50,7 +50,7 @@ export default function Navbar() {
 
                 {chevDown &&
                     (<div className='dropDown' >
-                        <p onClick={() => { navigate('/admindashboard/account') }}><i className="fa-solid fa-gear"></i> Settings</p>
+                        <p onClick={() => { navigate('/admin/account') }}><i className="fa-solid fa-gear"></i> Settings</p>
                         <hr />
                         <p onClick={() => {
                             window.localStorage.setItem('login', false)
@@ -61,7 +61,6 @@ export default function Navbar() {
                         }}><i className="fa-solid fa-right-from-bracket"></i> Logout</p>
                     </div>)
                 }
-
             </div>
         </div>
     )
