@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link,  useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
 // import { users } from '../components/testData/logintest'
@@ -65,10 +65,10 @@ export default function Login() {
             if (respon.data?.response === 'Login successful') {
                 setUser(respon.data.user)
                 window.localStorage.setItem('token', respon.data?.token)
-                window.localStorage.setItem('user',JSON.stringify(respon.data.user))
-                if(user.role.toLowerCase() === 'staff'){
-                    navigate('/staff_dash')
-                }else{
+                window.localStorage.setItem('user', JSON.stringify(respon.data.user))
+                if (user.role.toLowerCase() === 'staff') {
+                    navigate('/staff/dashboard')
+                } else {
                     navigate('/admin/dashboard')
                 }
             }
@@ -77,8 +77,6 @@ export default function Login() {
             setMessage(err.response?.data?.message)
         })
     }
-
-    console.log("user", user)
 
     return (
         <div className='loginBody'>

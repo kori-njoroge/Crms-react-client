@@ -121,7 +121,7 @@
     text-align: left;
     position: absolute;
     z-index: 1;
-    top: 90%;
+    top: 92%;
     padding: 0vh 1.2vw;
 
 }
@@ -132,6 +132,10 @@
     margin: none;
     position: absolute;
     z-index: 1;
-    top: 90%;
+    top: 92%;
     padding: 0vh 1.2vw;
+}
+.donut-login{
+    position: absolute;
+    bottom: -47%;
 }
