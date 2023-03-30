@@ -114,3 +114,27 @@
 .edit-details button:hover {
     outline: 1px solid rgb(245, 141, 141);
 }
+
+.edit-details-valid{
+    top: 75%;
+    border: 1px solid green;
+    padding: 1vh;
+    border-radius: 3px;
+    left: 10%;
+    right:10%;
+    text-align: center;
+    width: fit-content;
+    margin: auto;
+}
+
+.edit-details-invalid{
+    top: 80%;
+    border: 1px solid red;
+    padding: 1vh;
+    border-radius: 3px;
+    left: 10%;
+    right:10%;
+    text-align: center;
+    width: fit-content;
+    margin: auto;
+}

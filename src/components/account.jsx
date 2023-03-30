@@ -1,15 +1,28 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../styles/account.css'
 
 import rick from '../assets/rick.png'
+import axios from 'axios';
+import { apiusers } from './api-links';
 
 export default function Account() {
-    const [update, setUpdate] = useState(false);
+    const [token, setToken] = useState('')
+    const [message, setMessage] = useState('')
+    const [update, setUpdate] = useState(!false);
+    const [user, setUser] = useState()
     const [selection, setSelection] = useState(
         {
             password: true,
             phone: false,
             email: false
+        }
+    )
+    const [newData, setNewData] = useState(
+        {
+            phone: '',
+            email: '',
+            password: '',
+            conPass: ''
         }
     )
 
@@ -21,7 +34,116 @@ export default function Account() {
         }))
     }
 
+    useEffect(() => {
+        let user = JSON.parse(window.localStorage.getItem('user'))
+        let tok = window.localStorage.getItem('token')
+        setToken(tok)
+        setUser(user)
+    }, []);
 
+    function handleOnchange(event) {
+        const { name, value } = event.target;
+        setNewData(prevState => {
+            return {
+                ...prevState,
+                [name]: value
+            }
+        })
+    }
+    function handleOnfocus() {
+        setMessage('')
+    }
+
+    function handleSubmit() {
+        if (newData.phone?.length) {
+            axios.patch(`${apiusers}/update-user`,
+                {
+                    id: user?.id,
+                    phone: newData.phone,
+                },
+                {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'Application/json'
+                    }
+                }).then(reply => {
+                    console.log(reply.data.message)
+                    setMessage(reply.data.message)
+                    setNewData(
+                        {
+                            phone: '',
+                            email: '',
+                            password: '',
+                            conPass: ''
+                        }
+                    )
+                }).catch(error => {
+                    console.log(error.response.data.message)
+                    setMessage(error.response.data.message)
+                })
+        }
+        else if (newData.email?.length) {
+            axios.patch(`${apiusers}/update-user`,
+                {
+                    id: user?.id,
+                    email: newData.email,
+                },
+                {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'Application/json'
+                    }
+                }).then(reply => {
+                    console.log(reply.data.message)
+                    setMessage(reply.data.message)
+                    setNewData(
+                        {
+                            phone: '',
+                            email: '',
+                            password: '',
+                            conPass: ''
+                        }
+                    )
+                }).catch(error => {
+                    console.log(error.response.data.message)
+                    setMessage(error.response.data.message)
+                })
+        }
+        else if (newData.password) {
+            if (newData.password === newData.conPass) {
+                axios.patch(`${apiusers}/update-user`,
+                    {
+                        id: user?.id,
+                        password: newData.password,
+                    },
+                    {
+                        headers: {
+                            'Authorization': `Bearer ${token}`,
+                            'Content-Type': 'Application/json'
+                        }
+                    }).then(reply => {
+                        console.log(reply.data.message)
+                        setMessage(reply.data.message)
+                        setNewData(
+                            {
+                                phone: '',
+                                email: '',
+                                password: '',
+                                conPass: ''
+                            }
+                        )
+                    }).catch(error => {
+                        console.log(error.response.data.message)
+                        setMessage(error.response.data.message)
+                    })
+            } else if (newData.phone?.length) {
+                setMessage('Passwords do not match')
+            }
+        } else {
+            setMessage('No data to update')
+        }
+    }
+    console.log(newData)
     return (
         <div className='account-page'>
             <img src={rick} alt="member logo" />
@@ -29,25 +151,25 @@ export default function Account() {
                 <div className="user-detailss">
                     <div className="det-left">
                         Name: <br />
-                        <p>Rick Sanchez</p>
+                        <p>{user?.full_name}</p>
                         Email:
-                        <p>ricksances@gmail.com</p>
+                        <p>{user?.email}</p>
                         Phone Number:
-                        <p>254706306415</p>
+                        <p>{user?.phone}</p>
                     </div>
                     <div className="det-right">
                         Title:
-                        <p>Super admin</p>
+                        <p>{user?.role}</p>
                         Joined At:
-                        <p>2021-09-11</p>
+                        <p>{(user?.joined_at)?.split('T')[0]}</p>
                         Password:
                         <p>******</p>
                     </div>
                 </div>
                 {
                     update &&
-                    <div className="edit-details">
-                        <div className="">
+                    <div className="edit-details" style={{ position: 'relative' }}>
+                        <div >
                             <p className={selection.password && 'selected'} onClick={() => { switchDetails(`password`) }}>Password</p>
                             <p className={selection.phone && 'selected'} onClick={() => { switchDetails(`phone`) }}>Phone</p>
                             <p className={selection.email && 'selected'} onClick={() => { switchDetails(`email`) }}>Email</p>
@@ -57,25 +179,51 @@ export default function Account() {
                         {selection.password &&
                             <div className="password-edit">
                                 <label htmlFor="password">New Password:</label>
-                                <input type="password" name="password" id="password" />
+                                <input
+                                    onFocus={handleOnfocus}
+                                    type="password"
+                                    name="password"
+                                    id="password"
+                                    value={newData.password}
+                                    onChange={handleOnchange} />
                                 <label htmlFor="conpassword">Confirm Password:</label>
-                                <input type="password" name="password" id="conpassword" />
+                                <input
+                                    onFocus={handleOnfocus}
+                                    type="password"
+                                    name="conPass"
+                                    id="conpassword"
+                                    value={newData.conPass}
+                                    onChange={handleOnchange} />
                             </div>}
 
                         {selection.phone &&
                             <div className="password-edit">
                                 <label htmlFor="password">New Phone number:</label>
-                                <input type="tel" name="password" id="password" />
+                                <input
+                                    onFocus={handleOnfocus}
+                                    type="tel"
+                                    name="phone"
+                                    value={newData.phone}
+                                    id="password" maxLength={12}
+                                    onChange={handleOnchange} />
                             </div>}
 
                         {selection.email &&
                             <div className="password-edit">
                                 <label htmlFor="password">New Email:</label>
-                                <input type="tel" name="password" id="password" />
+                                <input
+                                    onFocus={handleOnfocus}
+                                    type="tel"
+                                    name="email"
+                                    id="password"
+                                    value={newData.email}
+                                    onChange={handleOnchange} />
                             </div>}
-                        <button>Update Details</button>
+                        <button onClick={handleSubmit}>Update Details</button>
+                        {message && <p className={message === 'User details updated successfully' ? 'valid edit-details-valid' : 'invalid edit-details-invalid'}>{message}</p>}
                     </div>
                 }
+
             </div>
             {
                 update ?
