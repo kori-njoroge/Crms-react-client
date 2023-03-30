@@ -1,32 +1,59 @@
-import React, { useState } from 'react'
+import axios from 'axios';
+import React, { useEffect, useState } from 'react'
+import { apiproducts } from './api-links';
 import ExistingSales from './existing-sales';
 import Makesale from './makesale';
-import { products } from './testData/products-test';
 
 export default function Sales() {
+    const [products, setProducts] = useState([])
     const [makeSale, setMakeSale] = useState(false);
-    const[message, setMessage]= useState('');
-    const[selectedProds, setSelectedProds]= useState([])
+    const [message, setMessage] = useState('');
+    const [selectedProds, setSelectedProds] = useState([])
     const [search, setSearch] = useState('');
     const [prods, setProds] = useState({
         id: "",
         items: 1
     });
 
+    useEffect(() => {
+        let token = window.localStorage.getItem('token')
+        console.log(token)
+        async function fetchData() {
+            axios.get(`${apiproducts}/all`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                }
+            }
+            ).then(response => {
+                setProducts(response.data)
+                setProds(response.data)
+            }).catch(err => {
+                console.log(err)
+            })
+        }
+        fetchData();
+    }, [])
+
     function handleaddToCart() {
         if (prods.id) {
             let id = prods.id.split('-')[0];
-            let {items} = prods
-            setSelectedProds(prevState => [...prevState,{id,items}])
+            let { items } = prods
+            setSelectedProds(prevState => [...prevState, { id, items }])
             setMessage(`Item added successfully {${id}}`)
             setProds({
                 id: "",
                 items: 1
             })
-        }else{
+        } else {
             setMessage('Select Product to add !!!')
         }
     }
+
+    function handleOnFocus() {
+        setMessage('')
+    }
+
 
     return (
         <div className='sales-component'>
@@ -53,6 +80,7 @@ export default function Sales() {
                                 name="id"
                                 placeholder='Search by category'
                                 list="brow1"
+                            onFocus={handleOnFocus}
                                 value={prods.id}
                                 onChange={(event) => {
                                     setProds(prevState => {
@@ -66,11 +94,11 @@ export default function Sales() {
                             />
                             <button onClick={handleaddToCart}>Add</button>
                         </div>
-                        {message && <p className={`${message === 'Select Product to add !!!' ?'addprods-message addprods-message-invalid' :'addprods-message addprods-message-valid' }`}>{message}</p> }
+                        {message && <p className={`${message === 'Select Product to add !!!' ? 'addprods-message addprods-message-invalid' : 'addprods-message addprods-message-valid'}`}>{message}</p>}
                         <datalist id="brow1" className="data--list">
                             {products ?
                                 products.map((product, index) => (
-                                    <option key={index} value={`${product.id}-${product.title} ${product.price}`} >{`  ${product.title} ${product.price}    |       ${product.category}`}</option>
+                                    <option key={index} value={`${product.id}-${product.name} ${product.price}`} >{`  ${product.name} ${product.price}    |       ${product.category_id}`}</option>
                                 )) : 'Nothing'}
                         </datalist>
                     </>
@@ -85,7 +113,7 @@ export default function Sales() {
                     >Cancel</button>}
             </div>
             {makeSale ?
-                <Makesale search={search} selectedProds={selectedProds} setSelectedProds={setSelectedProds} /> 
+                <Makesale search={search} selectedProds={selectedProds} setSelectedProds={setSelectedProds} />
                 :
                 <ExistingSales search={search} />
             }
