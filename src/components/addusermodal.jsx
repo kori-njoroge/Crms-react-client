@@ -71,7 +71,6 @@ export default function AddUserModal({ setAdduser, user }) {
     function handleOnFocus() {
         setMessage('')
     }
-    console.log(userDetails)
 
     return (
         <div className='modal'>
