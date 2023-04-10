@@ -76,8 +76,8 @@ export default function Users() {
         <div className='modal-container'>
             <div className="filters">
                 <h5 className={filter === "" ? "h5active" : ""} onClick={() => { setFilter(``) }} >All Users</h5>
-                <h5 className={filter === "super Admin" ? "h5active" : ""} onClick={() => { setFilter(`super admin`) }} >Super Admins</h5>
-                <h5 className={filter === "Admin" ? "h5active" : ""} onClick={() => { setFilter(`admin`) }} >Admins</h5>
+                <h5 className={filter === "super admin" ? "h5active" : ""} onClick={() => { setFilter(`super admin`) }} >Super Admins</h5>
+                <h5 className={filter === "admin" ? "h5active" : ""} onClick={() => { setFilter(`admin`) }} >Admins</h5>
                 <h5 className={filter === "staff" ? "h5active" : ""} onClick={() => { setFilter(`staff`) }} >Staff</h5>
                 <h5 className={filter === "customer" ? "h5active" : ""} onClick={() => { setFilter(`customer`) }} >Customers</h5>
             </div>
