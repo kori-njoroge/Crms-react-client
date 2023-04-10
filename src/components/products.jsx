@@ -9,14 +9,14 @@ import TextWithReadMore from './textwithreadmore';
 import AddCategory from './add-category-modal';
 
 export default function Products() {
-    const[addCategory,setAddCategory]= useState(false)
+    const [addCategory, setAddCategory] = useState(false)
     const [loading, setLoading] = useState(true)
     const [addProd, setAddProd] = useState(false);
     const [prods, setProds] = useState([]);
     const [products, setProducts] = useState([]);
     const [search, setSearch] = useState('');
     const [filter, setFilter] = useState('');
-    const [showPopUp, setShowPopUp] = useState(products?.map(() => false));
+    const [showPopUp, setShowPopUp] = useState();
 
 
     useEffect(() => {
@@ -32,6 +32,7 @@ export default function Products() {
             ).then(response => {
                 setProducts(response.data)
                 setProds(response.data)
+                setShowPopUp(response?.data.map(() => false))
                 setLoading(false)
             }).catch(err => {
                 setLoading(false)
@@ -173,7 +174,7 @@ export default function Products() {
                                     <p onClick={() => {
                                         deleteItem(item.id);
                                         handleEllipsisClose(index)
-                                    }}>Delete products</p>
+                                    }}>Delete product</p>
                                 </div>}
                         </tr>
                     ))
