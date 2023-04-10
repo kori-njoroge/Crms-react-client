@@ -12,7 +12,7 @@ export default function Customers() {
     const [users, setUsers] = useState([])
     const [members, setMembers] = useState([])
     const [search, setSearch] = useState('');
-    const [showPopUp, setShowPopUp] = useState(members?.map(() => false));
+    const [showPopUp, setShowPopUp] = useState();
     const [filter, setFilter] = useState("");
     const [user, setUser] = useState()
 
@@ -26,7 +26,7 @@ export default function Customers() {
         let token = window.localStorage.getItem('token')
         setLoading(true)
         async function fetchData() {
-            axios.get(`${apiusers}/`, {
+            axios.get(`${apiusers}/all-customers`, {
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json'
@@ -35,6 +35,7 @@ export default function Customers() {
             ).then(response => {
                 setUsers(response.data)
                 setMembers(response.data)
+                setShowPopUp(response?.data?.map(() => false))
                 setLoading(false)
             }).catch(err => {
                 setLoading(false)
@@ -42,6 +43,7 @@ export default function Customers() {
         }
         fetchData();
     }, [])
+    console.log(showPopUp)
 
     useEffect(() => {
         function setFilterfunc() {
@@ -55,6 +57,7 @@ export default function Customers() {
     }, [filter])
 
     function handleEllipsisClick(index) {
+        console.log(index)
         const popUp = showPopUp.map((_, i) => i === index)
         setShowPopUp(popUp)
     }
@@ -105,7 +108,6 @@ export default function Customers() {
                             <td>Full Name</td>
                             <td>Phone No</td>
                             <td>Email</td>
-                            <td>Title</td>
                             <td>Joining Date</td>
                             <td>Actions</td>
                         </tr>
@@ -119,17 +121,12 @@ export default function Customers() {
                                 <td className='user--name'><img src={rick} alt="member logo" />{user.full_name}</td>
                                 <td>{user.phone}</td>
                                 <td>{user.email}</td>
-                                <td>{user.role}</td>
-                                <td>{(user.joined_at).split('T')[0]}</td>
+                                <td>{(user.joined_At).split('T')[0]}</td>
                                 <td className='actions' onClick={() => { handleEllipsisClick(index) }}><i className="fa-solid fa-ellipsis-vertical" ></i></td>
                                 {showPopUp[index] &&
                                     <div className='action-drop'>
                                         <i className="fa-solid fa-x fa-actions" onClick={() => { handleEllipsisClose(index) }}></i>
-                                        <p>Last Activity</p>
-                                        <hr className='hrhr' />
-                                        <p>Update Details</p>
-                                        <hr className='hrhr' />
-                                        <p>Delete Account</p>
+                                        <p>Update Details &nbsp;&nbsp;</p>
                                     </div>}
                             </tr>
                         ))
