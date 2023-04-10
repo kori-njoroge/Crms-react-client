@@ -12,7 +12,7 @@ export default function Users() {
     const [users, setUsers] = useState([])
     const [members, setMembers] = useState([])
     const [search, setSearch] = useState('');
-    const [showPopUp, setShowPopUp] = useState(members?.map(() => false));
+    const [showPopUp, setShowPopUp] = useState();
     const [filter, setFilter] = useState("");
 
 
@@ -29,8 +29,8 @@ export default function Users() {
             ).then(response => {
                 setUsers(response.data)
                 setMembers(response.data)
+                setShowPopUp(response?.data.map(() => false))
                 setLoading(false)
-                console.log(response.data)
             }).catch(err => {
                 setLoading(false)
             })
@@ -106,6 +106,7 @@ export default function Users() {
                             <td>Email</td>
                             <td>Title</td>
                             <td>Joining Date</td>
+                            {/* {filter ==='customer' && <td>Points</td>} */}
                             <td>Actions</td>
                         </tr>
                     </thead>
@@ -120,15 +121,14 @@ export default function Users() {
                                 <td>{user.email}</td>
                                 <td>{user.role}</td>
                                 <td>{(user.joined_at).split('T')[0]}</td>
+                                {/* {filter === 'customer' &&<td>{user.points}</td>} */}
                                 <td className='actions' onClick={() => { handleEllipsisClick(index) }}><i className="fa-solid fa-ellipsis-vertical" ></i></td>
                                 {showPopUp[index] &&
                                     <div className='action-drop'>
                                         <i className="fa-solid fa-x fa-actions" onClick={() => { handleEllipsisClose(index) }}></i>
-                                        <p>Last Activity</p>
+                                        <p>Update Details &nbsp;&nbsp;</p>
                                         <hr className='hrhr' />
-                                        <p>Update Details</p>
-                                        <hr className='hrhr' />
-                                        <p>Delete Account</p>
+                                        <p>Delete Account &nbsp;&nbsp;</p>
                                     </div>}
                             </tr>
                         ))

@@ -43,7 +43,6 @@ export default function Customers() {
         }
         fetchData();
     }, [])
-    console.log(showPopUp)
 
     useEffect(() => {
         function setFilterfunc() {
